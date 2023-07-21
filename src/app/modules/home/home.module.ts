@@ -13,6 +13,7 @@ import {
   ComicsService,
   EventsService,
 } from '@store/services';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { BannerComponent } from './card/banner/banner.component';
 import { CharactersComponent } from './card/characters/characters.component';
 import { ComicsComponent } from './card/comics/comics.component';
@@ -34,6 +35,7 @@ import { HomeService } from './providers/home.service';
   imports: [
     CommonModule,
     HomeRoutingModule,
+    NzButtonModule,
     StoreModule.forFeature(fromEvents.featureKey, fromEvents.reducer),
     StoreModule.forFeature(fromCharacters.featureKey, fromCharacters.reducer),
     StoreModule.forFeature(fromComics.featureKey, fromComics.reducer),
