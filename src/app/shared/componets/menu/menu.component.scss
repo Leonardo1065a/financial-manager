@@ -1,0 +1,12 @@
+:host {
+  header {
+    margin-bottom: -4px;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 0;
+    }
+  }
+}
