@@ -1,22 +1,42 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from './layouts/full/full.component';
 
 const routes: Routes = [
-  { 
-    path: 'home', 
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+  {
+    path: '',
+    component: FullComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomeModule),
+      },
+    ],
   },
-  { 
-    path: 'page', 
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'non-authentication',
+        loadChildren: () =>
+          import('./pages/not-authorization/not-authorization.module').then(
+            (m) => m.NotAuthorizationModule
+          ),
+      },
+    ],
   },
-
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: 'home' }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

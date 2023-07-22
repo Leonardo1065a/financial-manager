@@ -11,10 +11,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { MenuModule } from './shared/componets/menu/menu.module';
-
+import {
+  AppNavItemComponent,
+  BlankComponent,
+  BrandingComponent,
+  FullComponent,
+  HeaderComponent,
+  SidebarComponent,
+} from './layouts';
+import { ZorroModule } from './material.module';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorHandlingService implements ErrorHandler {
   constructor() {
@@ -28,7 +35,13 @@ export class ErrorHandlingService implements ErrorHandler {
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FullComponent,
+    BlankComponent,
+    SidebarComponent,
+    HeaderComponent,
+    BrandingComponent,
+    AppNavItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,22 +49,22 @@ export class ErrorHandlingService implements ErrorHandler {
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    MenuModule,
+    ZorroModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Limite de ações mantidas no histórico (opcional)
       logOnly: environment.production, // Exibir logs somente em ambiente de produção (opcional)
       autoPause: true, // Pausar gravação de ações ao sair da página (opcional)
-      name: 'Meu App Store'
-    })
+      name: 'Meu App Store',
+    }),
   ],
   providers: [
     {
       provide: ErrorHandler,
-      useClass: ErrorHandlingService
-    }
+      useClass: ErrorHandlingService,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
